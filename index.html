@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>دعوة أحمد وهالة الوردية</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&family=Pinyon+Script&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one screen. A closed pink envelope with a wax seal sits centred; on tap the flap lifts, the envelope drops away and an arched card with blossom branches rises in and fills line by line. */
+:root{
+  --rose:#d9a4b4;
+  --rose-deep:#b8607a;
+  --blush:#f7e6eb;
+  --blush-2:#f1ccd7;
+  --paper:#fffafb;
+  --ink:#8a3b54;
+  --body:#6d4655;
+  --muted:#a98591;
+  --f-head:'Cairo','Tajawal',sans-serif;
+  --f-body:'Tajawal','Cairo',sans-serif;
+  --f-script:'Pinyon Script','Snell Roundhand',cursive;
+  --f-small:'Cormorant Garamond',Georgia,serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--blush);color:var(--body);font-family:var(--f-body);overflow:hidden}
+.stage{--cw:min(90vw,430px,46vh);--cw:min(90vw,430px,46dvh);position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;direction:rtl;-webkit-tap-highlight-color:transparent;
+  background:
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .3 0 0 0 0 .38 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(175deg,#fbeef2 0%,var(--blush) 45%,var(--blush-2) 100%)}
+.bg{position:absolute;inset:0;pointer-events:none}
+.bg svg{width:100%;height:100%;display:block}
+
+/* petals */
+.petals{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 2s ease 1s}
+.stage.s-card .petals{opacity:1}
+.petal{position:absolute;top:-6vh;border-radius:80% 0 80% 0;background:linear-gradient(135deg,#f6cdd9,#e8a3b6);opacity:.75;will-change:transform;animation:fall var(--t) linear var(--d) infinite}
+@keyframes fall{from{transform:translate3d(0,-8vh,0) rotate(0)}to{transform:translate3d(var(--dx),112vh,0) rotate(540deg)}}
+
+/* envelope */
+.envelope{position:relative;width:min(88vw,440px);aspect-ratio:4/3;perspective:1300px;transition:transform 1.5s cubic-bezier(.55,0,.25,1),opacity 1s ease .4s;will-change:transform}
+.envelope .eb,.envelope .ef,.envelope .face{position:absolute;inset:0;border-radius:14px}
+.eb{background:linear-gradient(160deg,#eebfcc,#e3a7b9);box-shadow:0 22px 40px -18px rgba(150,70,95,.55),0 2px 0 rgba(255,255,255,.5) inset}
+.ef{z-index:2;clip-path:polygon(0 0,50% 54%,100% 0,100% 100%,0 100%);background:linear-gradient(180deg,#f6d7e0,#f0c4d1)}
+.ef::after{content:"";position:absolute;inset:3.2%;border-radius:10px;border:1px dashed rgba(184,96,122,.28);clip-path:polygon(0 0,50% 52%,100% 0,100% 100%,0 100%);pointer-events:none}
+.flap{position:absolute;inset:0;z-index:3;transform-origin:50% 0;transform-style:preserve-3d;transition:transform 1.2s cubic-bezier(.5,0,.2,1)}
+.flap .a{backface-visibility:hidden;-webkit-backface-visibility:hidden;clip-path:polygon(0 0,100% 0,50% 58%);background:linear-gradient(180deg,#f1c8d4,#e8afc0)}
+.flap .b{backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateX(180deg);clip-path:polygon(0 0,100% 0,50% 58%);background:linear-gradient(0deg,#e29fb3,#eab4c4)}
+.stage.s-flap .flap{transform:rotateX(180deg)}
+.stage.s-out .envelope{transform:translate3d(0,62dvh,0) scale(.92);opacity:0}
+.stage.s-gone .envelope{display:none}
+.name-top{position:absolute;left:0;right:0;bottom:100%;margin-bottom:6.5vh;text-align:center;font-family:var(--f-script);font-size:min(13vw,56px);line-height:1;color:var(--ink);direction:ltr;transition:opacity .6s ease}
+.name-top small{display:block;margin-top:10px;font-family:var(--f-small);font-weight:600;font-size:min(3vw,13px);letter-spacing:.42em;color:var(--muted);text-transform:uppercase}
+.hint{position:absolute;left:0;right:0;top:100%;margin-top:26px;text-align:center;font:600 15px var(--f-head);color:var(--rose-deep);animation:pulse 2.4s ease-in-out infinite;transition:opacity .5s ease}
+@keyframes pulse{50%{opacity:.45}}
+.stage.s-seal .hint,.stage.s-seal .name-top{opacity:0;animation:none}
+
+.seal{position:absolute;left:50%;top:58%;z-index:5;width:22%;aspect-ratio:1;border:0;background:none;padding:0;cursor:pointer;transform:translate(-50%,-50%);transition:transform .8s cubic-bezier(.3,1.4,.4,1),opacity .6s ease .1s}
+.seal svg{width:100%;height:100%;display:block;animation:breathe 3.2s ease-in-out infinite;will-change:transform}
+@keyframes breathe{50%{transform:scale(1.05)}}
+.seal:focus-visible{outline:2px solid var(--rose-deep);outline-offset:6px;border-radius:50%}
+.stage.s-seal .seal{transform:translate(-50%,-50%) scale(1.3) rotate(10deg);opacity:0;pointer-events:none}
+
+/* card */
+.card{position:absolute;left:50%;top:50%;margin-top:-26px;width:var(--cw);aspect-ratio:5/8.8;container-type:inline-size;transform:translate(-50%,-48%) scale(.82);opacity:0;transition:transform 1.9s cubic-bezier(.2,.75,.2,1),opacity 1.1s ease;will-change:transform,opacity;
+  border-radius:50% 50% 7% 7%/28.4% 28.4% 4% 4%;background:linear-gradient(180deg,#fffcfd,var(--paper));box-shadow:0 30px 60px -26px rgba(150,70,95,.55),0 0 0 1px rgba(217,164,180,.35)}
+.card{pointer-events:none}
+.stage.s-card .card{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto}
+.card::before{content:"";position:absolute;inset:3.4cqw;border-radius:50% 50% 5% 5%/27.5% 27.5% 3% 3%;border:1px solid rgba(217,164,180,.9);pointer-events:none}
+.flora{position:absolute;pointer-events:none;overflow:visible}
+.flora.tr{width:54cqw;height:54cqw;top:-8cqw;right:-12cqw}
+.flora.bl{width:50cqw;height:50cqw;bottom:-9cqw;left:-12cqw}
+.in{position:absolute;inset:0;padding:23cqw 12cqw 9.5cqw;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.g{display:flex;flex-direction:column;align-items:center;gap:1.6cqw;width:100%}
+.rv{opacity:0;transform:translateY(2.2cqw);transition:opacity .9s ease,transform .9s ease}
+.rv.on{opacity:1;transform:none}
+
+.mono{width:13cqw;height:13cqw;border-radius:50%;border:1px solid var(--rose);display:grid;place-items:center;font-family:var(--f-script);font-size:6.6cqw;color:var(--ink);direction:ltr;padding-bottom:.6cqw}
+.t1{font-size:4.3cqw;font-weight:700;color:var(--ink)}
+.t2{font-size:3.9cqw;font-weight:500}
+.t3{font-size:3.4cqw;font-weight:500;color:var(--muted)}
+.t4{font:700 4.5cqw var(--f-head);letter-spacing:.4cqw;color:var(--rose-deep);display:flex;align-items:center;gap:3cqw;width:100%;justify-content:center}
+.t4 i{flex:0 0 11cqw;height:1px;background:var(--rose)}
+.names{font:800 11.5cqw/1.15 var(--f-head);color:var(--ink);display:flex;align-items:baseline;gap:2.4cqw;justify-content:center}
+.names em{font-style:normal;font-weight:400;font-size:6cqw;color:var(--rose)}
+.latin{font-family:var(--f-script);font-size:8.6cqw;line-height:1;color:var(--rose-deep);direction:ltr}
+.t6{font-size:3.6cqw;font-weight:500;color:var(--muted)}
+.when{display:flex;align-items:center;justify-content:center;gap:4.5cqw;width:100%;direction:rtl}
+.when .day{font:800 17cqw/1 var(--f-head);color:var(--ink);font-variant-numeric:tabular-nums}
+.when .vr{width:1px;align-self:stretch;background:var(--rose);opacity:.8}
+.when .rest{display:flex;flex-direction:column;gap:1cqw;text-align:right}
+.when .wd{font:700 4cqw var(--f-head);color:var(--rose-deep)}
+.when .my{font:700 5cqw var(--f-head);color:var(--ink)}
+.when .tm{font:500 3.8cqw var(--f-body);color:var(--body)}
+.venue{display:flex;align-items:center;gap:1.8cqw;font:700 4.4cqw var(--f-head);color:var(--ink)}
+.venue svg{width:4.2cqw;height:4.2cqw;flex:none}
+.cd{display:flex;gap:2.2cqw;direction:rtl;font-variant-numeric:tabular-nums}
+.cd div{width:14.5cqw;padding:1.8cqw 0 1.4cqw;border-radius:2.6cqw;background:var(--blush);display:flex;flex-direction:column;align-items:center;gap:.2cqw}
+.cd b{font:700 5.4cqw/1 var(--f-head);color:var(--ink)}
+.cd span{font:500 2.4cqw var(--f-body);color:var(--muted)}
+.thanks{font-size:3.4cqw;font-weight:500;color:var(--muted);margin-top:1.4cqw}
+
+.cta{position:absolute;z-index:6;left:50%;top:calc(50% - 26px + var(--cw) * .88 + 16px);translate:-50% 0;font:700 14px var(--f-head);color:#fff;background:var(--rose-deep);text-decoration:none;padding:10px 22px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity .8s ease,transform .2s ease;box-shadow:0 8px 18px -8px rgba(150,70,95,.8);visibility:hidden}
+.cta.show{opacity:1;pointer-events:auto;visibility:visible}
+.cta:active{transform:scale(.97)}
+.cta:focus-visible,.replay:focus-visible,.mute:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.mute{position:absolute;z-index:20;top:max(12px,env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));width:38px;height:38px;border-radius:50%;border:1px solid rgba(184,96,122,.4);background:rgba(255,250,251,.85);color:var(--rose-deep);font-size:16px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;opacity:0;pointer-events:none;transition:opacity .8s ease}
+.mute.show{opacity:1;pointer-events:auto}
+.replay{position:absolute;z-index:20;bottom:max(10px,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);border:0;background:none;color:var(--muted);font:600 13px var(--f-head);cursor:pointer;padding:6px 12px;opacity:0;pointer-events:none;transition:opacity .8s ease}
+.replay.show{opacity:1;pointer-events:auto}
+
+.stage.reset,.stage.reset *{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion:reduce){.stage *{transition:none!important}.petal,.seal svg,.hint{animation:none}}
+</style>
+
+</head>
+<body>
+<main class="stage" id="stage" aria-label="دعوة زفاف">
+  <audio id="bgm" preload="auto" loop></audio>
+  <div class="bg" aria-hidden="true"><svg id="shadow" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice"></svg></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <section class="envelope" id="env">
+    <div class="name-top" id="nameTop"><span id="nameLatin">Ahmed &amp; Hala</span><small>Wedding Invitation</small></div>
+    <div class="eb"></div>
+    <div class="ef"></div>
+    <div class="flap"><div class="face a"></div><div class="face b"></div></div>
+    <button class="seal" id="seal" aria-label="افتح الدعوة">
+      <svg viewBox="0 0 120 120">
+        <defs><radialGradient id="wg" cx=".35" cy=".3" r=".95"><stop offset="0" stop-color="#e9a2b6"/><stop offset=".6" stop-color="#cf7a92"/><stop offset="1" stop-color="#b25770"/></radialGradient></defs>
+        <circle cx="62" cy="67" r="54" fill="rgba(120,40,65,.28)"/>
+        <path id="wax" fill="url(#wg)" d=""/>
+        <circle cx="60" cy="60" r="38" fill="none" stroke="#e8a0b4" stroke-width="1.6" opacity=".75"/>
+        <circle cx="60" cy="60" r="35" fill="none" stroke="#a24a62" stroke-width="1.2" opacity=".5"/>
+        <g fill="#f6cfda" opacity=".92">
+          <path d="M60 84 C59 70 60 58 60 40" stroke="#f6cfda" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <path d="M60 62 C48 62 42 54 44 46 C54 46 60 54 60 62Z"/>
+          <path d="M60 62 C72 62 78 54 76 46 C66 46 60 54 60 62Z"/>
+          <path d="M60 78 C50 78 45 72 46 65 C55 65 60 71 60 78Z"/>
+          <path d="M60 78 C70 78 75 72 74 65 C65 65 60 71 60 78Z"/>
+          <path d="M60 40 C54 36 54 30 60 26 C66 30 66 36 60 40Z"/>
+        </g>
+      </svg>
+    </button>
+    <div class="hint" id="hint">اضغط على الختم لفتح الدعوة</div>
+  </section>
+
+  <article class="card" id="card">
+    <svg class="flora tr" id="floraTR" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <svg class="flora bl" id="floraBL" viewBox="0 0 100 100" aria-hidden="true"></svg>
+    <div class="in" id="copy">
+      <div class="g"><div class="mono rv" id="mono">A&amp;H</div></div>
+      <div class="g">
+        <div class="t1 rv">إلى من هم أغلى من الروح</div>
+        <div class="t2 rv">سروري سيبقى مختلفًا بحضوركم</div>
+        <div class="t3 rv">بكل الود والحب تشرف بدعوتكم لحضور</div>
+      </div>
+      <div class="g">
+        <div class="t4 rv"><i></i><span>حفل زفاف</span><i></i></div>
+        <div class="names rv"><span id="gName">أحمد</span><em>و</em><span id="bName">هالة</span></div>
+        <div class="latin rv" id="latin">Ahmed &amp; Hala</div>
+      </div>
+      <div class="g">
+        <div class="t6 rv">وذلك بمشيئة الله تعالى</div>
+        <div class="when rv">
+          <div class="day" id="dDay">12</div>
+          <div class="vr"></div>
+          <div class="rest"><div class="wd" id="dWd">السبت</div><div class="my" id="dMy">ديسمبر 2026</div><div class="tm" id="dTm">الساعة 8 مساءً</div></div>
+        </div>
+        <div class="venue rv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b8607a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.6"/></svg>
+          <span id="venue">قاعة قصر الملوك</span>
+        </div>
+      </div>
+      <div class="g">
+        <div class="cd rv" id="cd" aria-label="العد التنازلي">
+          <div><b id="c_d">--</b><span>يوم</span></div>
+          <div><b id="c_h">--</b><span>ساعة</span></div>
+          <div><b id="c_m">--</b><span>دقيقة</span></div>
+          <div><b id="c_s">--</b><span>ثانية</span></div>
+        </div>
+        <div class="thanks rv">بحضوركم يتم لنا الفرح والسرور</div>
+      </div>
+    </div>
+  </article>
+
+  <a class="cta" id="cta" href="#" target="_blank" rel="noopener">أضف الموعد إلى التقويم</a>
+  <button class="mute" id="mute" type="button" aria-label="كتم الصوت" aria-pressed="false">🔊</button>
+  <button class="replay" id="replay" type="button">إعادة العرض</button>
+</main>
+
+<script>
+(function(){
+  /* ---- editable details ---- */
+  var CONFIG={groom:"أحمد",bride:"هالة",latin:"Ahmed & Hala",iso:"2026-12-12T20:00:00+02:00",timeLabel:"الساعة 8 مساءً",venue:"قاعة قصر الملوك",audio:"mp31.m4a"};
+  var $=function(id){return document.getElementById(id)};
+  $('gName').textContent=CONFIG.groom;$('bName').textContent=CONFIG.bride;
+  $('latin').textContent=CONFIG.latin;$('nameLatin').textContent=CONFIG.latin;
+  $('venue').textContent=CONFIG.venue;$('dTm').textContent=CONFIG.timeLabel;
+  $('mono').textContent=CONFIG.latin.replace(/[^A-Za-z]*([A-Za-z])[A-Za-z]*[^A-Za-z]+([A-Za-z]).*/,'$1&$2');
+  var target=new Date(CONFIG.iso);
+  try{
+    $('dDay').textContent=new Intl.DateTimeFormat('ar-EG-u-nu-latn',{day:'numeric',timeZone:'Africa/Cairo'}).format(target);
+    $('dWd').textContent=new Intl.DateTimeFormat('ar-EG',{weekday:'long',timeZone:'Africa/Cairo'}).format(target);
+    $('dMy').textContent=new Intl.DateTimeFormat('ar-EG-u-nu-latn',{month:'long',year:'numeric',timeZone:'Africa/Cairo'}).format(target);
+  }catch(e){}
+  var bgm=$('bgm');bgm.src=CONFIG.audio;
+
+  /* calendar link */
+  (function(){
+    var f=function(d){return d.toISOString().replace(/[-:]|\.\d{3}/g,'')};
+    var end=new Date(target.getTime()+3*3600*1000);
+    $('cta').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('حفل زفاف '+CONFIG.groom+' و'+CONFIG.bride)+'&dates='+f(target)+'/'+f(end)+'&location='+encodeURIComponent(CONFIG.venue);
+  })();
+
+  var NS="http://www.w3.org/2000/svg";
+  function el(p,n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e}
+  function rng(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+  /* wax edge */
+  (function(){var d='',n=20;for(var i=0;i<=n*2;i++){var a=i/(n*2)*Math.PI*2,r=(i%2?50:55)+Math.sin(i*1.9)*1.1;d+=(i?'L':'M')+(60+Math.cos(a)*r).toFixed(1)+' '+(60+Math.sin(a)*r).toFixed(1)}
+    var p=$('wax');p.setAttribute('d',d+'Z');p.setAttribute('stroke','#c46d86');p.setAttribute('stroke-width','4');p.setAttribute('stroke-linejoin','round')})();
+
+  /* soft leaf shadows on the paper (static, no filters) */
+  (function(){
+    var svg=$('shadow'),R=rng(7);
+    function branch(x0,y0,cx,cy,x1,y1,n,sc,flip){
+      for(var pass=0;pass<3;pass++){
+        var g=el(svg,'g',{fill:'rgba(168,86,107,'+(.045)+')',stroke:'none'});
+        var k=1+pass*.16;
+        for(var i=0;i<=n;i++){
+          var t=i/n,x=(1-t)*(1-t)*x0+2*(1-t)*t*cx+t*t*x1,y=(1-t)*(1-t)*y0+2*(1-t)*t*cy+t*t*y1;
+          var dx=2*(1-t)*(cx-x0)+2*t*(x1-cx),dy=2*(1-t)*(cy-y0)+2*t*(y1-cy);
+          var ang=Math.atan2(dy,dx)*180/Math.PI;
+          [-1,1].forEach(function(sd,j){
+            var a=ang+sd*(48+((i*37+j*11)%20)),L=(34+((i*13)%16))*sc*k,W=L*.36;
+            el(g,'path',{d:'M0 0 Q'+L*.5+' '+-W+' '+L+' 0 Q'+L*.5+' '+W+' 0 0Z',transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+a.toFixed(1)+')'});
+          });
+        }
+        el(g,'path',{d:'M'+x0+' '+y0+' Q'+cx+' '+cy+' '+x1+' '+y1,fill:'none',stroke:'rgba(168,86,107,.05)','stroke-width':2.2*k});
+      }
+    }
+    branch(430,-20,330,120,170,200,9,1.1);
+    branch(-30,640,70,600,230,700,8,.9);
+    branch(420,520,330,610,250,660,6,.8);
+  })();
+
+  /* blossoms and roses on the card */
+  function blossom(g,x,y,r,rot){
+    var G=el(g,'g',{transform:'translate('+x+' '+y+') rotate('+rot+') scale('+r+')'});
+    for(var i=0;i<5;i++)el(G,'path',{d:'M0 0 C-5 -3 -6 -11 -1.4 -12.4 L0 -10.8 L1.4 -12.4 C6 -11 5 -3 0 0Z',transform:'rotate('+i*72+')',fill:'#f8d4de',stroke:'#dc98ad','stroke-width':.45});
+    el(G,'circle',{cx:0,cy:0,r:1.9,fill:'#e07f9a'});
+    for(var j=0;j<6;j++){var a=j*1.047;el(G,'circle',{cx:Math.cos(a)*3.4,cy:Math.sin(a)*3.4,r:.55,fill:'#b8607a'})}
+  }
+  function bud(g,x,y,r,rot){var G=el(g,'g',{transform:'translate('+x+' '+y+') rotate('+rot+') scale('+r+')'});el(G,'ellipse',{cx:0,cy:-4,rx:3.2,ry:5,fill:'#efb6c6',stroke:'#d98aa0','stroke-width':.4});el(G,'path',{d:'M0 0 L0 -3',stroke:'#c46d86','stroke-width':.5})}
+  function leaf(g,x,y,rot,L,col){var G=el(g,'g',{transform:'translate('+x+' '+y+') rotate('+rot+')'});el(G,'path',{d:'M0 0 Q'+L*.5+' '+-L*.34+' '+L+' 0 Q'+L*.5+' '+L*.34+' 0 0Z',fill:col||'#b98a8f',stroke:'#8d5e66','stroke-width':.25});el(G,'path',{d:'M0 0 L'+L*.88+' 0',stroke:'rgba(255,235,240,.6)','stroke-width':.3,fill:'none'})}
+  function rose(g,x,y,r){
+    var G=el(g,'g',{transform:'translate('+x+' '+y+')'}),pal=['#eba7b9','#f2bfcd','#dc8ba2','#f8d6df','#a8566b'],i;
+    for(i=0;i<7;i++){var a=i/7*6.283;el(G,'circle',{cx:Math.cos(a)*r*.58,cy:Math.sin(a)*r*.58,r:r*.52,fill:pal[0],stroke:pal[4],'stroke-width':.3})}
+    for(i=0;i<5;i++){var b=i/5*6.283+.5;el(G,'circle',{cx:Math.cos(b)*r*.36,cy:Math.sin(b)*r*.36,r:r*.42,fill:pal[1],stroke:pal[4],'stroke-width':.28})}
+    for(i=0;i<4;i++){var c=i/4*6.283+1;el(G,'circle',{cx:Math.cos(c)*r*.2,cy:Math.sin(c)*r*.2,r:r*.3,fill:pal[2],stroke:pal[4],'stroke-width':.25})}
+    el(G,'circle',{cx:0,cy:0,r:r*.17,fill:pal[3],stroke:pal[4],'stroke-width':.25});
+  }
+  (function(){
+    var tr=$('floraTR'),bl=$('floraBL');
+    /* top-right branch */
+    var d='M100 6 C84 14 66 18 50 34 C38 46 32 60 22 76';
+    el(tr,'path',{d:d,fill:'none',stroke:'#8d5e66','stroke-width':1.1,'stroke-linecap':'round'});
+    el(tr,'path',{d:'M66 18 C70 28 66 38 58 46',fill:'none',stroke:'#8d5e66','stroke-width':.7,'stroke-linecap':'round'});
+    el(tr,'path',{d:'M46 38 C38 36 30 38 24 34',fill:'none',stroke:'#8d5e66','stroke-width':.7,'stroke-linecap':'round'});
+    [[90,10,-20],[78,16,30],[70,20,-40],[58,26,50],[54,36,-30],[44,44,60],[38,52,-50],[30,64,40],[60,40,10],[28,36,-60]].forEach(function(l){leaf(tr,l[0],l[1],l[2]+90,7.5,'#c39aa0')});
+    [[86,12,1,10],[72,22,.9,40],[56,30,1.05,-20],[44,46,.95,15],[34,60,.85,60],[62,44,.8,0],[26,38,.8,25],[20,76,.75,-30]].forEach(function(b){blossom(tr,b[0],b[1],b[2]*.62,b[3])});
+    [[94,20,.8,30],[48,26,.7,-30],[30,50,.7,50],[16,70,.6,10]].forEach(function(b){bud(tr,b[0],b[1],b[2]*.7,b[3])});
+    /* bottom-left roses */
+    [[24,70,-30],[44,84,10],[60,90,-20],[12,50,-70],[34,58,20],[50,70,-50],[72,82,-10]].forEach(function(l){leaf(bl,l[0],l[1],l[2]-20,9,'#c39aa0')});
+    rose(bl,32,72,12);rose(bl,56,86,9);rose(bl,14,52,7);
+    [[46,60,.6,20],[70,76,.55,-20],[22,88,.55,40]].forEach(function(b){blossom(bl,b[0],b[1],b[2],b[3])});
+    [[8,36,.7,-30],[62,66,.6,20]].forEach(function(b){bud(bl,b[0],b[1],b[2]*.7,b[3])});
+  })();
+
+  /* petals */
+  (function(){
+    var P=$('petals'),R=rng(23);
+    for(var i=0;i<9;i++){
+      var d=document.createElement('i');d.className='petal';var s=9+R()*9;
+      d.style.cssText='left:'+(R()*100).toFixed(1)+'%;width:'+s.toFixed(1)+'px;height:'+(s*1.2).toFixed(1)+'px;--t:'+(11+R()*8).toFixed(1)+'s;--d:'+(-R()*14).toFixed(1)+'s;--dx:'+((R()-.5)*30).toFixed(0)+'vw';
+      P.appendChild(d);
+    }
+  })();
+
+  /* countdown */
+  var cdTimer=null;
+  function pad(n){return n<10?'0'+n:''+n}
+  function tick(){
+    var ms=target-new Date();
+    if(ms<=0){['c_d','c_h','c_m','c_s'].forEach(function(i){$(i).textContent='00'});return}
+    var s=Math.floor(ms/1000);
+    $('c_d').textContent=Math.floor(s/86400);
+    $('c_h').textContent=pad(Math.floor(s%86400/3600));
+    $('c_m').textContent=pad(Math.floor(s%3600/60));
+    $('c_s').textContent=pad(s%60);
+  }
+  tick();
+
+  /* ---- timeline ---- */
+  var stage=$('stage'),replay=$('replay'),mute=$('mute'),cta=$('cta'),timers=[],started=false;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rvs=[].slice.call(document.querySelectorAll('#copy .rv'));
+  function at(ms,fn){timers.push(setTimeout(fn,ms))}
+  function cls(c){stage.classList.add(c)}
+  function clear(){timers.forEach(clearTimeout);timers=[];clearInterval(cdTimer)}
+  function sound(){try{bgm.currentTime=0;var p=bgm.play();if(p&&p.catch)p.catch(function(){})}catch(e){}}
+  mute.addEventListener('click',function(){bgm.muted=!bgm.muted;mute.textContent=bgm.muted?'🔇':'🔊';mute.setAttribute('aria-pressed',bgm.muted)});
+  function done(){replay.classList.add('show');cta.classList.add('show');cdTimer=setInterval(tick,1000)}
+  function play(){
+    if(started)return;started=true;clear();
+    sound();mute.classList.add('show');
+    $('seal').setAttribute('tabindex','-1');
+    if(reduce){stage.classList.add('reset');['s-seal','s-flap','s-card','s-out','s-gone'].forEach(cls);rvs.forEach(function(r){r.classList.add('on')});void stage.offsetWidth;stage.classList.remove('reset');done();return}
+    cls('s-seal');
+    at(250,function(){cls('s-flap')});
+    at(1250,function(){cls('s-card');cls('s-out')});
+    at(3000,function(){cls('s-gone')});
+    rvs.forEach(function(r,i){at(2400+i*420,function(){r.classList.add('on')})});
+    at(2400+rvs.length*420+300,done);
+  }
+  function reset(){
+    clear();started=false;bgm.pause();
+    stage.className='stage reset';
+    rvs.forEach(function(r){r.classList.remove('on')});
+    replay.classList.remove('show');cta.classList.remove('show');
+    void stage.offsetWidth;stage.classList.remove('reset');
+    $('seal').removeAttribute('tabindex');
+    at(600,function(){started=false;play()});
+  }
+  $('seal').addEventListener('click',play);
+  $('env').addEventListener('click',function(){if(!started)play()});
+  replay.addEventListener('click',reset);
+})();
+</script>
+</body>
+</html>
